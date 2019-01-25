@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { Image } from "./Image.js";
+import  Image  from "./Image.js";
+import { withRouter } from 'react-router'
 
 class BreedImg extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       imageUrl: [],
       breedList: [],
@@ -49,8 +50,8 @@ class BreedImg extends React.Component {
   };
 
   render() {
-    console.log(this.state);
-    let { imageUrl, breedList, breedChoice } = this.state;
+    console.log(this.props);
+    let { imageUrl, breedList } = this.state;
 
     let allBreeds = Object.keys(breedList).map((breed, i) => {
       return (
@@ -71,10 +72,10 @@ class BreedImg extends React.Component {
           <button onClick={this.getRandomImgOfBreed}>Get Image</button>
         </div>
         <br />
-        <Image imageUrl={imageUrl} />
+        <Image imageUrl={imageUrl} addFavImage={this.props.addFavImage} favsList={this.props.favsList}/>
       </>
     );
   }
 }
 
-export default BreedImg;
+export default withRouter(BreedImg);

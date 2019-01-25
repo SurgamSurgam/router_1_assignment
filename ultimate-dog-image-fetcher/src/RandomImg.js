@@ -1,19 +1,30 @@
 import React from "react";
 import axios from "axios";
-import { Image } from "./Image.js";
+import Image  from "./Image.js";
 import { withRouter } from "react-router";
 import { SelectDrop } from "./SelectDrop.js";
 
 class RandomImg extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       imageUrl: [],
-      pickedNum: null
+      pickedNum: null,
+      initImgTracker: false
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
+    this.getFetchDogs();
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    if (!this.props.match.params.id && prevProps.match.params.id) {
+      this.getFetchDogs();
+    }
+  }
+
+  getFetchDogs = () => {
     axios
       .get(
         `https://dog.ceo/api/breeds/image/random/${
@@ -39,11 +50,8 @@ class RandomImg extends React.Component {
     axios
       .get(`https://dog.ceo/api/breeds/image/random/${+e.target.value}`)
       .then(response => {
-        this.updateRequestedImg(response);
-        // setTimeout(() => {
-        // debugger;
         this.props.history.push("/random/" + +e.target.value);
-        // }, 1000);
+        this.updateRequestedImg(response);
       })
       .catch(err => {
         console.log("Get Random Dog ERROR", err);
@@ -51,23 +59,22 @@ class RandomImg extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     let { imageUrl } = this.state;
-    let urlDogInput = this.props.match.params.id ? (
-      <></>
-    ) : (
-      <>
-        <button onClick={this.componentDidMount}>Get Random Dog IMG</button>
-        <SelectDrop getPickedNumImages={this.getPickedNumImages} />
-      </>
-    );
+    console.log('randomIMG', this.state);
 
     return (
       <>
         <h1>Random Dogs HERE</h1>
-        <div className="selectButtonDiv">{urlDogInput}</div>
+        <div className="selectButtonDiv">
+          <button onClick={this.getFetchDogs}>Get Random Dog IMG</button>
+          <SelectDrop getPickedNumImages={this.getPickedNumImages} />
+        </div>
         <br />
-        <Image imageUrl={imageUrl} />
+        <Image
+          imageUrl={imageUrl}
+          addFavImage={this.props.addFavImage}
+          favsList={this.props.favsList}
+        />
       </>
     );
   }

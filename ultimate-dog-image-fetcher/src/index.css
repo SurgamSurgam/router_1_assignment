@@ -15,10 +15,10 @@ nav {
   color: #34090c;
   background-color: #79bea8;
   text-decoration: none;
-  margin-bottom: 80px;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   background-color: #79bea8;
   color: #34090c;
   padding: 14px 25px;
@@ -27,7 +27,8 @@ a:link, a:visited {
   display: inline-block;
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
   transition: 0.5s;
   background-color: #e7f3ef;
   color: #34090c;
@@ -45,6 +46,34 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  text-align: center;
+}
+
+.favImgDiv > img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 150px; /* Set a small width */
+}
+
+/* Add a hover effect (blue shadow) */
+.favImgDiv > img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.singleFavorite > img {
+  width: 500px;
+  height: 400px;
+  margin-top: 15px;
+  border: 10px outset black;
+  object-fit: cover;
+}
+
+.parentFavImgDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
 }
 
 img {
@@ -52,4 +81,5 @@ img {
   height: 300px;
   margin-top: 15px;
   border: 10px outset white;
+  object-fit: cover;
 }
