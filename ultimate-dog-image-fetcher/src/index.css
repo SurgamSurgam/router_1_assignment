@@ -65,8 +65,9 @@ h1 {
   width: 500px;
   height: 400px;
   margin-top: 15px;
-  border: 10px outset black;
+  border: 10px outset #79bea8;
   object-fit: cover;
+  padding: 10px;
 }
 
 .parentFavImgDiv {
@@ -82,4 +83,16 @@ img {
   margin-top: 15px;
   border: 10px outset white;
   object-fit: cover;
+}
+
+.comments {
+  list-style: none;
+  padding: 20px;
+  border: 3px outset #79bea8;
+}
+
+.comments > li {
+  background: #F8F8FF;
+  border-bottom: 3px double black;
+  padding: 15px;
 }
